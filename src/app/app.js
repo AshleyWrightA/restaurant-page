@@ -1,7 +1,7 @@
 import { buildHomeContent } from "./homePage";
 import { buildMenuContent } from "./menuPage";
 import { buildAboutContent } from "./aboutPage";
-import contact from "./contactPage";
+import { buildContactContent } from "./contactPage";
 
 const buildIntialDOM = () => {
   const initBody = document.body;
@@ -89,7 +89,7 @@ const eventListeners = () => {
     clearCurrentButton(e);
     setCurrentButton(e);
     clearBodyContent();
-    contact();
+    buildContactContent();
   });
 };
 
