@@ -4,7 +4,14 @@ import { menuItemsData } from "./menuItemsData";
 (function makeMenuItems() {
   // IIFE Function to initialize the menu, one time.
   menuItemsData.forEach((e) => {
-    const menuItem = new MenuItem(e.title, "", e.iconName, e.iconStyle, e.image, e.price);
+    const menuItem = new MenuItem(
+      e.title,
+      e.description,
+      e.iconName,
+      e.iconStyle,
+      e.image,
+      e.price
+    );
     Menu.addMenuItem(menuItem);
   });
 })();
@@ -15,15 +22,19 @@ const createItemElements = () => {
   Menu.menuArray.forEach((e) => {
     const itemElement = document.createElement("div");
     const itemElementHeader = document.createElement("div");
+    const itemNamePriceWrapper = document.createElement("div");
     const itemName = document.createElement("h2");
-    const itemHeaderWrapper = document.createElement("div");
+    const itemPriceWrapper = document.createElement("div");
     const itemIcon = document.createElement("i");
     const itemPrice = document.createElement("p");
+    const itemDescription = document.createElement("p");
 
     itemElement.classList.add("item-element");
     itemElementHeader.classList.add("item-element-header");
+    itemNamePriceWrapper.classList.add("item-name-price-wrapper");
     itemName.classList.add("item-name");
-    itemHeaderWrapper.classList.add("item-header-wrapper");
+    itemDescription.classList.add("item-description");
+    itemPriceWrapper.classList.add("item-price-wrapper");
     itemIcon.classList.add(e.iconName);
     itemIcon.classList.add(e.iconStyle);
     itemPrice.classList.add("item-price");
@@ -31,14 +42,17 @@ const createItemElements = () => {
     itemElement.style.backgroundImage = `url(${e.image})`;
     itemElement.style.backgroundSize = "100%";
     itemName.textContent = e.name;
+    itemDescription.textContent = e.description;
     itemPrice.textContent = e.price;
 
     itemsContainer.appendChild(itemElement);
     itemElement.appendChild(itemElementHeader);
-    itemElementHeader.appendChild(itemName);
-    itemElementHeader.appendChild(itemHeaderWrapper);
-    itemHeaderWrapper.appendChild(itemPrice);
-    itemHeaderWrapper.appendChild(itemIcon);
+    itemElementHeader.appendChild(itemNamePriceWrapper);
+    itemNamePriceWrapper.appendChild(itemName);
+    itemNamePriceWrapper.appendChild(itemPriceWrapper);
+    itemPriceWrapper.appendChild(itemPrice);
+    itemPriceWrapper.appendChild(itemIcon);
+    itemElementHeader.appendChild(itemDescription);
   });
 };
 

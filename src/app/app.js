@@ -3,7 +3,7 @@ import { buildMenuContent } from "./menuPage";
 import { buildAboutContent } from "./aboutPage";
 import { buildContactContent } from "./contactPage";
 
-const buildIntialDOM = () => {
+function buildIntialDOM() {
   const initBody = document.body;
 
   const header = document.createElement("div");
@@ -37,9 +37,9 @@ const buildIntialDOM = () => {
   buttonWrapper.appendChild(menuButton);
   buttonWrapper.appendChild(aboutButton);
   buttonWrapper.appendChild(contactButton);
-};
+}
 
-const clearBodyContent = () => {
+function clearBodyContent() {
   const bodyContent = document.querySelector(".body-content");
 
   bodyContent.style.backgroundImage = "";
@@ -48,20 +48,33 @@ const clearBodyContent = () => {
   if (bodyContent.hasChildNodes() === true) {
     bodyContent.removeChild(bodyContent.lastChild);
   }
-};
+}
 
-const setCurrentButton = (e) => {
+function setCurrentButton(e) {
   e.target.classList.add("current");
-};
+}
 
-const clearCurrentButton = (e) => {
+function clearCurrentButton(e) {
   const currentButton = document.querySelector(".current");
   if (currentButton !== e.target) {
     currentButton.classList.remove("current");
   }
-};
+}
 
-const eventListeners = () => {
+function orderEvent() {
+  const homeButton = document.querySelector(".home-button");
+  const menuButton = document.querySelector(".menu-button");
+  const orderButton = document.querySelector(".home-order-button");
+
+  orderButton.addEventListener("click", () => {
+    homeButton.classList.remove("current");
+    menuButton.classList.add("current");
+    clearBodyContent();
+    buildMenuContent();
+  });
+}
+
+function eventListeners() {
   const homeButton = document.querySelector(".home-button");
   const menuButton = document.querySelector(".menu-button");
   const aboutButton = document.querySelector(".about-button");
@@ -72,6 +85,7 @@ const eventListeners = () => {
     setCurrentButton(e);
     clearBodyContent();
     buildHomeContent();
+    orderEvent();
   });
   menuButton.addEventListener("click", (e) => {
     clearCurrentButton(e);
@@ -91,15 +105,13 @@ const eventListeners = () => {
     clearBodyContent();
     buildContactContent();
   });
-};
-
-const logSuccess = () => console.log("Loaded DOM");
+}
 
 export const initPage = () => {
   buildIntialDOM();
-  eventListeners();
-  logSuccess();
   buildHomeContent();
+  eventListeners();
+  orderEvent();
 };
 
 export default initPage;

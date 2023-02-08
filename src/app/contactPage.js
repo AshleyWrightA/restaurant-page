@@ -44,8 +44,4 @@ export const buildContactContent = () => {
   leftInfoDiv.appendChild(locationIcon);
   rightInfoDiv.appendChild(contactPhone);
   rightInfoDiv.appendChild(contactLocation);
-
-  // allowfullscreen=""
-  // loading="lazy"
-  // referrerpolicy="no-referrer-when-downgrade"
 };
